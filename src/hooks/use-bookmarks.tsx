@@ -6,7 +6,6 @@ import { getUrlInformation } from '../utils/get-url-information'
 interface Context {
   bookmarks: Bookmark[]
   addBookmark: (url: string, type: BookmarkType) => Promise<void>
-  removeBookmark: (id: string) => void
 }
 
 export const BookmarksContext = createContext<Context>({} as Context)
@@ -24,14 +23,11 @@ function BookmarksProvider({ children }: PropsWithChildren) {
     setBookmarks((list) => [...list, { id: bookmarkIdFromList(list), ...information }])
   }, [])
 
-  const removeBookmark = useCallback((id: string) => {}, [])
-
   return (
     <BookmarksContext.Provider
       value={{
         bookmarks,
         addBookmark,
-        removeBookmark,
       }}
     >
       {children}
